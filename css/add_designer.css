@@ -1,0 +1,20 @@
+/* CSS Document */
+
+#designer_info_table{
+	margin-left: 120px;
+	margin-bottom: 80px;
+	}
+	
+#info_form
+{
+	margin-top: 10px;
+}
+
+#age_form
+{
+	margin-top: 2px;
+}
+
+th{
+	width:100px;
+}
