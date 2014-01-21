@@ -1,3 +1,12 @@
+<?php 
+
+require_once './tool.php';
+Tool::start_session(60*60);
+
+$title = '工长大本营App管理后台';
+$head1 = '欢迎';
+?>
+
 <!DOCTYPE html>
 <html lang="en"><head>
         <meta charset="utf-8">
@@ -7,7 +16,7 @@
         <meta name="author" content="">
         <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-        <title>设计师列表</title>
+        <title><?php echo $title ?></title>
 
         <!-- Bootstrap core CSS -->
         <link href="./bootstrap/v3/css/bootstrap.css" rel="stylesheet">
@@ -39,18 +48,30 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">工长大本营App管理后台</a>
+                    
+                    <a class="navbar-brand" href="#"><?php echo $title ?></a>
                 </div>
                 <div class="navbar-collapse collapse">
-                <p class="navbar-text pull-right">
+
+
                     
                                         <?php
 
 require_once './config.php';
 require_once BASE_PATH.'/error_log_setting.php';
-echo '<a href='.'"'.$base_url.'/login.php'.'"'.'class="navbar-link">登录</a>   |   '.'<a href='.'"'.$base_url.'/register.php'.'"'.'class="navbar-link">注册</a>';
 
+ echo '<ul class="nav navbar-nav">'.'<li><a href='.BASE_URL.'/user_info.php'.'>设计师</a></li><li><a href="#about">关于我们</a></li><li><a href="#contact">联系我们</a></li></ul><p class="navbar-text pull-right">';
+
+if(isset($_SESSION['username']))
+{
+    echo '<a href='.'"'.BASE_URL.'/user_info.php'.'"'.'class="navbar-link">'.$_SESSION['username'].'</a>   |   '.'<a href='.'"'.$BASE_URL.'/register.php'.'"'.'class="navbar-link">退出</a>';
+}
+else
+{
+    echo '<a href='.'"'.$BASE_URL.'/login.php'.'"'.'class="navbar-link">登录</a>   |   '.'<a href='.'"'.$BASE_URL.'/register.php'.'"'.'class="navbar-link">注册</a>';
+}
                     ?>
+
                     
               <!--<a href="#" class="navbar-link">登录</a> | 
               <a href="#" class="navbar-link">注册</a>-->
@@ -65,7 +86,7 @@ echo '<a href='.'"'.$base_url.'/login.php'.'"'.'class="navbar-link">登录</a>  
             <!-- Begin page content -->
             <div class="container">
                 <div class="page-header">
-                    <h1>欢迎</h1>
+                    <h1><?php echo $head1;?></h1>
                 </div>
                 <p>
 

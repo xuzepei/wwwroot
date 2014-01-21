@@ -45,7 +45,7 @@
                     <p class="navbar-text pull-right">
                                   <?php
 require_once './config.php';
-echo '<a href='.'"'.$base_url.'/login.php'.'"'.'class="navbar-link">登录</a>';
+echo '<a href='.'"'.$BASE_URL.'/login.php'.'"'.'class="navbar-link">登录</a>';
                     ?>
                         </p>
                 </div><!--/.nav-collapse -->

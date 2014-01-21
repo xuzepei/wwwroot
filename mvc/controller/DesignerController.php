@@ -4,12 +4,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-include_once './mvc/model/Designer.php';
+include_once BASE_PATH.'/mvc/model/Designer.php';
 
 class DesignerController {
     
-
-    public $db_name = 'gongzhang_db';
+    public $db_name = DB_NAME;
     public $tb_name = 'designer_tb';
         
     public function __construct()
@@ -18,6 +17,12 @@ class DesignerController {
 
     public function invoke()
     {
+        $title = TITLE;
+        $head1 = '设计师';
+        $css_file_array = array('/bootstrap/v3/css/bootstrap.css');
+
+        include BASE_PATH.'/mvc/view/header.php';
+        
         $action = $_GET['action'];
         $id = $_GET['id'];
         if(isset($id) && isset($action) && 0 == strcmp($action,"delete"))
@@ -26,12 +31,13 @@ class DesignerController {
         }
 
         $designers = $this->getItemList();
-        include './mvc/view/designer_list.php';
+        include BASE_PATH.'/mvc/view/designer_list.php';
+        include BASE_PATH.'/mvc/view/footer.php';
     }
 
     public function getItemList()
     {
-        require_once './db/medoo.php';
+        require_once BASE_PATH.'/db/medoo.php';
         $database = new medoo($this->db_name);
         $result = $database->select($this->tb_name, "*");
         
@@ -54,14 +60,14 @@ class DesignerController {
     public function removeById($id)
     {
         //require_once 'error_log_setting.php';
-        require_once './db/medoo.php';
+        require_once BASE_PATH.'/db/medoo.php';
         $database = new medoo($this->db_name);
         $database->delete($this->tb_name, ["id"=>$id]);
     }
 
     public function add($title, $header, $css_file_array, $js_file_array)
     {
-        include './mvc/view/header.php';
+        include BASE_PATH.'/mvc/view/header.php';
         
         $uploadImageFailed = false;
         $save_path;
@@ -140,8 +146,8 @@ class DesignerController {
                         $head_image_url = '';
 
                     //上传成功，写入数据库
-                    require_once 'db/medoo.php';
-                    $database = new medoo('gongzhang_db');
+                    require_once BASE_PATH.'db/medoo.php';
+                    $database = new medoo($this->db_name);
 
                     $result = $database->insert("designer_tb", [
                         "name" => $name,
@@ -183,9 +189,14 @@ class DesignerController {
             }
         }
         else
-            include 'mvc/view/add_designer_form.php';
+            include BASE_PATH.'mvc/view/add_designer_form.php';
 
-        include 'mvc/view/footer.php';
+        include BASE_PATH.'mvc/view/footer.php';
+    }
+    
+    public function test()
+    {
+        echo 'test from '.__FILE__;
     }
 
 }

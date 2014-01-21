@@ -1,7 +1,7 @@
                     <!-- footer -->
                 <hr>
                 <footer>
-                    <p>© SanguoTech 2013</p>
+                    <p>© SanguoTech 2014</p>
                 </footer>
             </div>
 
