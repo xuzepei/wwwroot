@@ -1,4 +1,3 @@
-
 <form name="login_form" method="post" action=<?php echo $action;?> onsubmit="return validate();">
 <table width="330" border="0" align="center" cellpadding="5" bgcolor= "#eeeeee">
 <tr>
