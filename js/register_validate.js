@@ -25,7 +25,7 @@ function showAlert(type,text)
 }
 
 function validate(){
-
+    
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     var repeat_password = document.getElementById('repeat_password').value;
@@ -34,7 +34,6 @@ function validate(){
     if(0 == username.length)
     {
         showAlert("danger","请填写用户名！");
-        
         return false;
     }
     

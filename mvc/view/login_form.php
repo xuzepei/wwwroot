@@ -1,17 +1,21 @@
-<form name="login_form" method="post" action=<?php echo $action;?> onsubmit="return validate();">
-<table width="330" border="0" align="center" cellpadding="5" bgcolor= "#eeeeee">
-<tr>
-    <td>用户名/邮箱：</td>
-    <td><input name="username" type="text" id="username"> </td>
-</tr>
-<tr>
-    <td>密码：</td>
-    <td><input name="password" type="password" id="password"></td>
-</tr>
-<tr>
-    <td colspan="2" align="center">
-      <input type="submit" name="submit" value="提交">
-</tr>
-</table>
+<form class="form-horizontal" role="form" name="login_form" id="login_form" method="post" action=<?php echo $action; ?> onsubmit="return validate();">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">用户名/邮箱:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control form-control-login" name="username" id="username" placeholder="" value=<?php echo '"' . $username . '"' ?>>
+        </div>
+    </div>
+    <div class="form-group form-group-login">
+        <label for="password" class="col-sm-2 control-label">密码:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control form-control-login" name="password" id="password" placeholder="">
+        </div>
+    </div>
+    <div class="form-group form-group-login">
+        <label for="submit" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">登录</button>
+        </div>
+    </div>
 </form>
 
