@@ -12,17 +12,17 @@ class medoo
 	protected $database_type = 'mysql';
 
 	// For MySQL, MSSQL, Sybase
-	protected $server = '127.0.0.1';
+	protected $server = DB_HOST;
 	
-	protected $username = 'root';
+	protected $username = DB_USERNAME;
 	
-	protected $password = '123';
+	protected $password = DB_PASSWORD;
 
 	// For SQLite
 	protected $database_file = '';
 
 	// Optional
-	protected $port = 3306;
+	protected $port = DB_PORT;
 
 	protected $charset = 'utf8';
 
