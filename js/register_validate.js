@@ -30,6 +30,7 @@ function validate(){
     var password = document.getElementById('password').value;
     var repeat_password = document.getElementById('repeat_password').value;
     var email = document.getElementById('email').value;
+    var captcha = document.getElementById('captcha').value;
      
     if(0 == username.length)
     {
@@ -73,5 +74,17 @@ function validate(){
         return false;
     }
     
+    if(0 == captcha.length)
+    {
+        showAlert("danger","请输入验证码！");
+        return false;
+    }
+    
     return true;
+}
+
+function reload_captcha()
+{
+    var captcha_img = document.getElementById('captcha_img')
+    captcha_img.src = captcha_img.src+"?time="+Math.random();
 }

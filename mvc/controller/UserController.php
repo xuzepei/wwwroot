@@ -26,62 +26,74 @@ class UserController {
         $database = new medoo(DB_NAME);
 
         $username = $_POST['username'];
+
         $password = $_POST['password'];
         $password_md5 = md5($password);
+
+        $captcha = $_POST['captcha'];
+
         $user_tb = "user_tb";
 
 
         $current_date = date('Y-m-d H:i:s', time());
 
+
         if (!empty($username))
         {
-            $sql = 'select * from ' . $user_tb . ' where username = "' . $username . '" && ' . 'password = "' . $password_md5 . '"';
-            $result = $database->select_by_sql($sql);
-
-            //var_dump($result);
-            //var_dump($database->error());
-
-            $msg = '';
-            $logined = false;
-            $by_type = 'username';
-            if ($result != false && count($result, 0))
+            if (true == empty($_SESSION['captcha']) || 0 != strcasecmp($captcha, $_SESSION['captcha']))
             {
-                $msg = 'Can login by username!';
-                $logined = true;
+                echo '<div id="alert" class="alert alert-danger">' . '验证码错误！' . "</div>";
             }
             else
             {
-                $by_type = 'email';
-                $sql = 'select * from ' . $user_tb . ' where email = "' . $username . '" && ' . 'password = "' . $password_md5 . '"';
+                $sql = 'select * from ' . $user_tb . ' where username = "' . $username . '" && ' . 'password = "' . $password_md5 . '"';
                 $result = $database->select_by_sql($sql);
 
-                if ($result != false && count($result, 0))
-                {
-                    $msg = 'Can login by email!';
-                    $logined = true;
-                }
-            }
-
-            $msg = 'Can not login!';
-
-            if ($logined)
-            {
-                //更新session
-                $_SESSION['username'] = $username;
-
-                // 更新用户登录信息
-                $ip = $_SERVER['REMOTE_ADDR']; // 获取客户端的IP
-                $sql = 'update ' . $user_tb . ' set login_times = login_times + 1, last_login_time = "' . $current_date . '", login_ip = "' . $ip . '" where ' . $by_type . ' = "' . $username . '"';
-                //echo $sql;
-                $result = $database->exec($sql);
-                //echo 'result:'.$result;
+                //var_dump($result);
                 //var_dump($database->error());
 
-                header("Location:" . BASE_URL . "/index.php");
-            }
-            else
-            {
-                echo '<div id="alert" class="alert alert-danger">' . '登录失败，用户名或密码错误！' . "</div>";
+                $msg = '';
+                $logined = false;
+                $by_type = 'username';
+                if ($result != false && count($result, 0))
+                {
+                    $msg = 'Can login by username!';
+                    $logined = true;
+                }
+                else
+                {
+                    $by_type = 'email';
+                    $sql = 'select * from ' . $user_tb . ' where email = "' . $username . '" && ' . 'password = "' . $password_md5 . '"';
+                    $result = $database->select_by_sql($sql);
+
+                    if ($result != false && count($result, 0))
+                    {
+                        $msg = 'Can login by email!';
+                        $logined = true;
+                    }
+                }
+
+                $msg = 'Can not login!';
+
+                if ($logined)
+                {
+                    //更新session
+                    $_SESSION['username'] = $username;
+
+                    // 更新用户登录信息
+                    $ip = $_SERVER['REMOTE_ADDR']; // 获取客户端的IP
+                    $sql = 'update ' . $user_tb . ' set login_times = login_times + 1, last_login_time = "' . $current_date . '", login_ip = "' . $ip . '" where ' . $by_type . ' = "' . $username . '"';
+                    //echo $sql;
+                    $result = $database->exec($sql);
+                    //echo 'result:'.$result;
+                    //var_dump($database->error());
+
+                    header("Location:" . BASE_URL . "/index.php");
+                }
+                else
+                {
+                    echo '<div id="alert" class="alert alert-danger">' . '登录失败，用户名或密码错误！' . "</div>";
+                }
             }
         }
 
@@ -144,11 +156,13 @@ class UserController {
 
         $password = $_POST['password'];
         $repeat_password = $_POST['repeat_password'];
-
         $password_md5 = md5($password);
         $repeat_password_md5 = md5($repeat_password);
 
         $email = $_POST['email'];
+
+        $captcha = $_POST['captcha'];
+
         $user_tb = "user_tb";
 
         $current_date = date('Y-m-d H:i:s', time());
@@ -170,6 +184,10 @@ class UserController {
             else if (false == $this->validate('email', $email))
             {
                 echo '<div id="alert" class="alert alert-danger">' . '请输入正确邮箱格式！' . "</div>";
+            }
+            else if (true == empty($_SESSION['captcha']) || 0 != strcasecmp($captcha, $_SESSION['captcha']))
+            {
+                echo '<div id="alert" class="alert alert-danger">' . '验证码错误！' . "</div>";
             }
             else
             {
@@ -201,6 +219,11 @@ class UserController {
 
         if (false == $register_success)
         {
+//            require_once BASE_PATH.'/tool/create_captcha.php';
+//            session_start(); 
+//            echo '<img src="'.BASE_PATH.'/tool/create_captcha.php'.'"border=0 align=absbottom>';//生成图片 
+//            echo $_SESSION["captcha"];//生成验证码值 
+
             $action = BASE_URL . '?c=user&m=register';
             include BASE_PATH . '/mvc/view/register_form.php';
         }

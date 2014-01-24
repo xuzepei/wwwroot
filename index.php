@@ -4,11 +4,11 @@
 require_once './config.php';
 
 //设置Session
-require_once BASE_PATH.'/tool.php';
+require_once BASE_PATH.'/tool/tool.php';
 Tool::start_session(60*60);
 
 //打印出错信息设置
-require_once BASE_PATH.'/error_log_setting.php';
+require_once BASE_PATH.'/tool/error_log_setting.php';
 
 $controller_name=$_GET['c'];
 $method=$_GET['m'];

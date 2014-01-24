@@ -1,6 +1,6 @@
 <?php
     
-    require_once './api/Curl.class.php';
+    require_once './tool/Curl.class.php';
 
     $token = 'szd6x4e-O24vceF9lYbDC7nQ4fbnVQ04LRPruXKdYcVsp8bvxjKo2GTWpB4f4Qjf7ljXnodEMl3xOGSQUHhbqPT5SunnLpGg-BTiJpCP0Wb5skLd6Ryvt_Z9i7Oc5Xnx40Km1svl-E9tcYLtyB9THQ';
     $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$token;

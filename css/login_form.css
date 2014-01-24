@@ -6,3 +6,26 @@ max-width: 300px;
 margin-top: 30px;
 margin-bottom: 15px;
 }
+
+.form-control-captcha{
+    max-width: 100px;
+}
+
+#captcha_img{
+    float: left;
+    margin-top: -35px;
+    margin-left: 120px;
+    cursor:pointer;
+}
+
+#reload_captcha_request
+{
+    float: left;
+    margin-top: -20px;
+    margin-left: 18px;
+}
+
+a {
+color: blue;
+text-decoration: underline;
+}
