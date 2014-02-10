@@ -28,7 +28,7 @@
     <div class="form-group form-group-register">
         <label for="captcha" class="col-sm-2 control-label">验证码:</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control form-control-captcha" name="captcha" id="captcha" placeholder=""><?php echo '<img id="captcha_img" src="' . BASE_URL . '/tool/create_captcha.php' . '" onclick="reload_captcha();" border=0 align=absbottom/>'.'<a id="reload_captcha_request" href="#" onclick="reload_captcha();return false;">换一个</a>';?>
+            <input type="text" class="form-control form-control-captcha" name="captcha" id="captcha" placeholder=""><?php echo '<img id="captcha_img" src="' . BASE_URL . '/tool/create_captcha.php?t='.time(). '" onclick="reload_captcha();" border=0 align=absbottom/>'.'<a id="reload_captcha_request" href="#" onclick="reload_captcha();return false;">换一个</a>';?>
         </div>
     </div>
 

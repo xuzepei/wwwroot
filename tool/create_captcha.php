@@ -1,5 +1,13 @@
 <?php
 require_once '../config.php';
+//require_once BASE_PATH.'/tool/tool.php';
+
+function log_to_file($text)
+{
+    $file = fopen("/Users/xuzepei/upload/log.txt","a");
+    fwrite($file,"\r\n\r\n".$text);
+    fclose($file);
+}
 
 session_start();
 
@@ -28,7 +36,6 @@ $im = imagecreate($width, $height);
 //设置图片背景色 
 $bg_color = imagecolorallocate($im, 255, 255, 255);
 
-
 //字符颜色 
 $text_color = imagecolorallocate($im, 41, 163, 238);
 
@@ -36,7 +43,7 @@ $text_color = imagecolorallocate($im, 41, 163, 238);
 $border_color = imagecolorallocate($im, 41, 163, 238);
 
 //干扰线,需要放在模糊点前面先画
-mt_srand();
+//mt_srand();
 for($i=0; $i < 3; $i++)
 {
     $line_color = imagecolorallocate($im, mt_rand(0,255), mt_rand(0,255), mt_rand(0,255));
@@ -50,9 +57,6 @@ for ($i = 0; $i < 200; $i++)
     $pixel_color = imagecolorallocate($im, mt_rand(0,255), mt_rand(0,255), mt_rand(0,255));
     imagesetpixel($im, mt_rand(0, $width), mt_rand(0, $height), $pixel_color);
 }
-
-//将验证码保存到SESSION，以便对比
-$_SESSION["captcha"] = $str;
 
 //画字符
 //imagestring($im, 10, 10, 10, $str, $text_color); //不能修改字体大小
@@ -68,5 +72,9 @@ for($i=0;$i<strlen($str);$i++)
 imagerectangle($im, 0, 0, $width - 1, $height - 1, $border_color);
 imagepng($im);
 imagedestroy($im);
+
+//将验证码保存到SESSION，以便对比
+$_SESSION["captcha"] = $str;
+//log_to_file($str);
 
 ?>

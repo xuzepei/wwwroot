@@ -42,6 +42,8 @@ class UserController {
         {
             if (true == empty($_SESSION['captcha']) || 0 != strcasecmp($captcha, $_SESSION['captcha']))
             {
+                echo 'session_captcha: '.$_SESSION['captcha'];
+                echo '$captcha: '.$captcha;
                 echo '<div id="alert" class="alert alert-danger">' . '验证码错误！' . "</div>";
             }
             else
@@ -187,6 +189,9 @@ class UserController {
             }
             else if (true == empty($_SESSION['captcha']) || 0 != strcasecmp($captcha, $_SESSION['captcha']))
             {
+                echo 'session_captcha: '.$_SESSION['captcha'];
+                echo '$captcha: '.$captcha;
+                
                 echo '<div id="alert" class="alert alert-danger">' . '验证码错误！' . "</div>";
             }
             else

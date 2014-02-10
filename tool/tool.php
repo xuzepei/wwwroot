@@ -23,6 +23,13 @@ class Tool {
         }
         $_SESSION['LAST_ACTIVITY'] = time();
     }
+    
+    static function log_to_file($text)
+    {
+        $file = fopen("/Users/xuzepei/upload/log.txt","a");
+        fwrite($file,"\r\n\r\n".$text);
+        fclose($file);
+    }
 
 }
 ?>

@@ -38,7 +38,7 @@
         <![endif]-->
         <style type="text/css"></style><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
 
-    <body>
+    <body onload="onload();">
         <!-- navigation bar-->
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
