@@ -10,7 +10,7 @@ if (!isset($type))
     $type = 0;
 
 if (0 == $type) // The English we speak
-    $url = 'http://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak/ep-150519';
+    $url = 'http://www.bbc.co.uk/learningenglish/english/features/witn/ep_141015';
 else if (1 == $type)// Words in the news
     $url = 'http://www.bbc.co.uk/learningenglish/english/features/witn/ep-150513';
 else if (2 == $type)// 6 minute English
@@ -127,7 +127,7 @@ function getAndParse($url, $cate_id) {
                         $temp_url = $tag->getAttribute('href');
                         if (strlen($temp_url) > 0) {
                             $temp = substr($temp_url, -4);
-                            if (0 == strcasecmp($temp, '.mp3') && 0 == strlen($mp3_url))
+                            if ((0 == strcasecmp($temp, '.mp3') || 0 == strcasecmp($temp,'.wav')) && 0 == strlen($mp3_url))
                                 $mp3_url = $temp_url;
                             else if (0 == strcasecmp($temp, '.pdf') && 0 == strlen($pdf_url))
                                 $pdf_url = $temp_url;
@@ -150,6 +150,11 @@ function getAndParse($url, $cate_id) {
             }
 
             echo json_encode($result_array);
+            
+            //echo '<script language="javascript"
+    //type="text/javascript">window.location.href="http://www.baidu.com";</script>';
+            echo goToWebpage('http://www.baidu.com');
+            
         }
     }
 }
@@ -199,4 +204,11 @@ function saveToDB($array) {
         echo 'cate_id: ' . $item['cate_id'] . '-------OK.';
         $mysql->closeDb();
     }
+}
+
+
+function goToWebpage($url)
+{ 
+    return '<script language="javascript"
+    type="text/javascript">window.location.href="'.$url.'";</script>';
 }
